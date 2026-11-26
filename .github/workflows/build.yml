@@ -4,9 +4,6 @@ name: Build PBMobile Overlay APK
 on:
   workflow_dispatch:
   push:
-    paths:
-      - 'PBMobileOverlay-Android16-Source.zip'
-      - '.github/workflows/build.yml'
 
 jobs:
   build:
@@ -28,13 +25,13 @@ jobs:
           gradle-version: '8.11.1'
 
       - name: Set up Android SDK
-        uses: android-actions/setup-android@v3
+        uses: android-actions/setup-android@v4
 
-      - name: Install Android SDK 36
+      - name: Install Android SDK
         run: sdkmanager "platforms;android-36" "build-tools;36.0.0"
 
       - name: Extract project
-        run: unzip PBMobileOverlay-Android16-Source.zip
+        run: unzip -o PBMobileOverlay-Android16-Source.zip
 
       - name: Build APK
         run: gradle -p PBMobileOverlay assembleDebug
